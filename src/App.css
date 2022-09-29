@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;1,200;1,300&display=swap');
+.active{
+  color:antiquewhite;
+}
+
+  header {
+    width:100%;
+    height:80px;
+   background-color: blueviolet;
+   /* justify-content: right; 
+   display:flex; */
+
+  }
+  
+  header .nav{
+    display:flex;
+    /* justify-content: right; */
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+    align-items: center;
+  }
+  header .nav a {
+  text-decoration: none;
+  color:white;
+  font-size: 17px;
+  margin-top:20px;
+  padding: 15px 16px; 
+  margin-right: 15px;
+  font-family: 'Jost', sans-serif;
+  justify-content: right;
+  }
+  @media (max-width: 600px){
+    .header {
+      height:7rem;
+    }
+    .abc{
+      display:none;
+    }
+    #nav_icon{
+      display:block !important;
+     
+    }  
+    .navbar-logo{
+      display:none;
+    }
+  }
+  .active{
+    color: #907;
+  }
+  #nav_icon{
+    display:none;
+  }  
+   .navbar-logo{
+    width: 100px;
+    height: max-content;
+    margin-left: opx;
+    
+    
+  }
+  .navbar a:hover{
+    color: rgb(133, 8, 8);
+  }
