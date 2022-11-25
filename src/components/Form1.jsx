@@ -92,6 +92,10 @@ export default function Form1() {
     list.splice(index, 1);
     setInput(list);
   }
+  function submitdata(e){
+    e.preventDefault();
+    console.log(input);
+   }
 
 //  function savedata(e,index) {
        
@@ -122,22 +126,24 @@ export default function Form1() {
           <h2>Form</h2>
         </div>
       </div> */}
-      <table>
-        <thead>
-          <tr>
-          <th><label className="d1">Date</label></th>
+      <table className="table">
+        <thead className="thead">
+          <tr className="tr">
+          <th className="th"><label className="d1">Date</label></th>
           <th><label className="st">State</label></th>
           <th><label className="sn">Sitename</label></th>
           <th><label className="dm">Dms</label></th>
           <th><label className="dl">Dms Loss %</label></th>
           <th><label className="r1">Revenue</label></th>
           </tr>
-          </thead>
+         </thead>
       </table>
-      <form>
+      <form onSubmit={submitdata}>
         {input.map((x, i) => {
           return (
+           
             <div className="form-inline" key={i}>
+              
               <div className="date">
                 {/* <label>Date</label> */}
                 <input
@@ -210,23 +216,7 @@ export default function Form1() {
                   onChange={(e) => handleDms(e, i)}
                 ></input>
                 {error?<p>This field is require</p> :null}
-                {/* {errors.dms && touched.dms ? (
-                  <p className="errormsg">{errors.dms}</p>
-                ) : null} */}
-                {/* <div className="errormsg">
-                  {error && dms.length <= 0 ? (
-                    <label className="vaildation">This field is require</label>
-                  ) : (
-                    ""
-                  )}
-                  <div className="errormsg">
-                    {number && dms.length <= 0 ? (
-                      <label className="vaildation">number require</label>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div> */}
+                
               </div>
 
               <div className="div5">

@@ -25,8 +25,9 @@ const Header = () =>{
               <div className='navbar'>
                   <NavLink to="/form1" style={({isActive})=>{return{backgroundColor:isActive?'green' : '' }}} className='abc' >Form1</NavLink>
                   <NavLink to="form2" style={({isActive})=>{return{backgroundColor:isActive?'green' : ''}}} className='abc' >Form2</NavLink>
-                  <NavLink to="contact" style={({isActive})=>{return{backgroundColor:isActive?'green' : ''}}} className='abc'>Contact</NavLink>
+                  <NavLink to="form3" style={({isActive})=>{return{backgroundColor:isActive?'green' : ''}}} className='abc'>Form3</NavLink>
                   <NavLink to="service" style={({isActive})=>{return{backgroundColor:isActive?'green' : ''}}}className='abc'>Service</NavLink>
+                  <NavLink to="Form4" style={({isActive})=>{return{backgroundColor:isActive?'green' : ''}}}className='abc'>Form4</NavLink>
                   <a href="#" id="nav_icon"><GiHamburgerMenu /></a>
                   
                   {/* <select id="nav_icon"> 

@@ -7,7 +7,7 @@ export default function Error() {
     <div className='errormain'>
     <img src={error} className="errorpage"></img>
     <div className='backonhome'>
-    <NavLink to="/home" style={{color:"white",textDecoration:"none",marginTop:20}}>GO To Home Page</NavLink>
+    <NavLink to="/form1" style={{color:"white",textDecoration:"none",marginTop:20}}>GO To Home Page</NavLink>
     </div>
   </div>
   )

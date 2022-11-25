@@ -110,7 +110,7 @@ const data1 = [
   },
 ];
 
-export const Form2 = () => {
+export default function Form2  () {
   const [siteIdError, setSiteIdError] = useState(false);
   const [sitenameError, setSitenameError] = useState(false);
   const [qcaError, setqcaError] = useState(false);
@@ -124,7 +124,6 @@ export const Form2 = () => {
   const [tariffError, settariffError] = useState(false);
   const [latitudeError, setlatitudeError] = useState(false);
   const [longitudeError, setlongitudeError] = useState(false);
-  // numeric errorstate
   const [number, setnumbererror] = useState(false);
   const [tariffnumber, setnumbertarifferror] = useState(false);
   const [latitudenumber, setlatitudenumbererror] = useState(false);
@@ -148,7 +147,10 @@ export const Form2 = () => {
     },
   ]);
   const [show, setShow] = useState(false);
-
+  function submitform(e){
+   e.preventDefault();
+   console.log(data);
+}
 
   const handleSiteid = (e) => {
     let siteidvalidate = e.target.value;
@@ -197,7 +199,7 @@ export const Form2 = () => {
   };
   const handleqca = (e) => {
     let qcavalidate = e.value;
-    if (qcavalidate == "" || qcavalidate == " Select... ") {
+    if (qcavalidate == "" || qcavalidate == " Select... "){
       setqcaError(true);
     } else {
       setqcaError(false);
@@ -387,7 +389,7 @@ export const Form2 = () => {
   return (
     <>
       <div className="main">
-        <form>
+        <form onSubmit={submitform}>
           <div className="main1">
             <div className="siteid">
               <label>Site ID</label>
@@ -644,7 +646,9 @@ export const Form2 = () => {
                 )}
               </div>
             </div>
-            <div className="submitbutton">
+            
+          </div>
+          <div className="submitbutton">
               <button
                 type="submit"
                 className="submitbtn"
@@ -655,7 +659,6 @@ export const Form2 = () => {
                 Submit
               </button>
             </div>
-          </div>
         </form>
       </div>
       <div className="togglebtn">

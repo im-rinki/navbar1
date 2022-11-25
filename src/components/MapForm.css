@@ -1,0 +1,154 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+.map{
+    margin-left:3rem;
+    margin-top:1rem;
+
+}
+.mapbtn{
+    margin-left:9rem;
+    margin-top:1rem;
+}
+.solar{
+   
+   border: none;
+    width:4rem;
+    height:1.5rem;
+    background-color:darkgreen;
+    border-radius: 5px;
+    color:white;
+    font-size: smaller; 
+}
+.wind{
+    border: none;
+    margin-left: 10px;
+    width:4rem;
+    height:1.5rem;
+    background-color: darkgreen;
+    border-radius: 5px;
+    color:white;
+    font-size: smaller;
+    }
+
+.both{
+    border: none;
+    margin-left: 10px;
+    width:4rem;
+    height:1.5rem;
+    background-color: darkgreen;
+    border-radius: 5px;
+    color:white;
+    font-size: smaller;
+}
+.MapForm{
+    display: flex;
+    margin-top: 30px;
+    
+} 
+.MapForm1{
+    display: flex;
+    margin-top: 20px;
+  
+}
+label{
+    margin-top: 5px;
+    font-weight: bold;
+    /* margin-left: 65px; */
+    text-align: center;
+  }
+  .select{
+    width:150px;
+    margin-left: 5px;
+    min-height:40px;
+  }
+
+.startdate{
+    display: flex;
+    flex-direction: column;
+    /* margin-left: 10px; */
+}
+.enddate{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    }
+    .statemap{
+
+    }
+    .statemaplabel{
+        text-align: center;
+        margin-left: 7rem;
+    }
+    .sitenamemap{
+        margin-left: 20px;
+    }
+    .inputmap{
+        width:250px;
+        /* margin-left: 10px; */
+        height:2rem; 
+    }
+    .selectmap{
+        width:250px;
+    /* margin-left: 10px; */
+    height:30px;
+    }
+    .MapFormBtn{
+        text-align:center;
+    margin-top:30px;
+    }
+    .mapformbutton{
+        border: none;
+        background-color: green;
+        border-radius:5px;
+    width:200px;
+    height:30px;
+    font-size:15px;
+    color:white;
+    }
+    .mapformtable{
+        margin-top: 40px;
+        width:200rem;
+    }
+ .table1, .th1, .td1 {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      .th1{
+        background-color: rgb(43, 101, 209); 
+        color:white;
+      }
+      .th1, .td1 {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 10px;
+        text-align: center;
+        
+      }
+      .headingtable{
+        text-align: center;
+        margin-top: 20px;
+        margin-left: 15rem;
+        font-weight: bold;
+      }
+      .formtable{
+        text-align: center;
+        margin-left: 10rem;
+        margin-top: 20px;
+      }
+      .downloadbtn{
+        text-align:center;
+        margin-top:20px;
+        margin-left:2rem;
+      }
+      .downloadbutton{
+        border: none;
+        background-color:darkgreen;
+        border-radius:5px;
+        width:200px;
+        height:30px;
+        font-size:15px;
+        color:white;
+      }

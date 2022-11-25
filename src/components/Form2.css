@@ -8,11 +8,24 @@
 .main1{
     display:flex;
     margin-top:10px;
+    margin-left:50px;
 }
 .main2{
     display:flex;
     margin-top:20px;
+    margin-left:50px;
 }
+label{
+    margin-top: 5px;
+    font-weight: bold;
+    /* margin-left: 65px; */
+    text-align: center;
+  }
+  .select{
+    width:150px;
+    margin-left: 5px;
+    min-height:40px;
+  }
 .siteid{
     display:flex;
     margin-left:10px;
@@ -28,14 +41,11 @@
 #input{
     width:150px;
     height:30px;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 label{
      margin-left:20px; 
-     
-    
-}
-
+     }
 .sitename{
     display:flex;
    flex-direction: column;
@@ -92,10 +102,10 @@ select{
     margin-left:10px;
 }
 .submitbutton{
-   text-align: right;
-   margin-right: 20px;
+   text-align: center;
+   /* margin-right: 20px; */
    margin-top: 25px;
-   margin-left: 30px;
+   /* margin-left: 30px; */
 }
 .errorMsg{
     color:red;
@@ -104,7 +114,7 @@ select{
     font-size: small;
 }
 .submitbtn{
-    width:80px;
+    width:200px;
     height:30px;
     background-color: green;
     color: white;
@@ -112,14 +122,13 @@ select{
 }
 
 .togglebtn{
-    margin-left: 25px;
+    margin-left: 60px;
     margin-top:50px;
 }
 .btnclick{
-    width:80px;
+    width:100px;
     height:30px;
     background-color: blue;
     color: blanchedalmond;
     border-radius: 5px;
-
 }
