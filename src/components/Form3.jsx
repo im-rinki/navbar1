@@ -1,13 +1,16 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import axios from "axios";
+//import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
+import _ from "lodash";
+// import { Loadingpage } from "../../components/Loadingpage";
+import { enIN } from "date-fns/locale";
+import "bootstrap/dist/css/bootstrap.min.css";
+import monthsToQuarters from "date-fns/monthsToQuarters";
 import "./Form3.css";
-const connectivitylevel = [
-  { value: "STU", label: "STU" },
-  { value: "CTU", label: "CTU" },
-  { value: "ALL", label: "ALL" },
-];
-const state = [
+
+ const state = [
   { value: "RJ", label: "RJ" },
   { value: "MP", label: "MP" },
   { value: "MH", label: "Mh" },
@@ -20,182 +23,533 @@ const state = [
   { value: "KA-ISTS", label: "KA-ISTS" },
   { value: "ALL", label: "ALL" },
 ];
-const requirmenttype = [
-  { value: "New Regulation", label: "New Regulation" },
-  { value: "New Amendment", label: "New Amendment" },
-  { value: "Procedural", label: "Procedural" },
-  { value: "Notice", label: "Notice" },
-  { value: "Order", label: "Order" },
-  { value: "Operational Issues", label: "Operational Issues" },
-];
-const requirment = [
-  { value: "Implementation requirment", label: "Implementation requirment" },
-  { value: "Dispute requirment", label: "Dispute requirment" },
-];
-const actiontaken = [
-  { value: "Challenge", label: "Challenge" },
-  { value: "Implement", label: "Implement" },
-  { value: "To be reviewed", label: "To be reviewed" },
-];
-const impact=[
-  { value: "data exposure", label: "data exposure" },
-  { value: "Revenue loss", label: "Revenue loss" },
-];
-const criticality=[
-  { value: "Low", label: "Low" },
-  { value: "Medium", label: "Medium" },
-  { value: "High", label: "High" },
-];
-const analyse=[ 
-  { value: "Yes", label: "Yes" },
-  { value: "No", label: "No" },
-  
-];
-const status=[
-  { value: "Open", label: "Open" },
-  { value: "Close", label: "Close" },
-];
 
-export default function Form3() {
-  const[register,setRegister]=useState([{date:"",quarter:"",affectedmw:"",Connectivitylevel:"",state:"",requirmenttype:"",
-  nodal:"",site:"",newchange:"",reference:"",analyse:"",impact:"",status:"",description:"",criticality:"",
-  requirment:"",actiontaken:"",key:"",presentworking:""},]);
+export default function Form3  ()  {
+  const [productTotalList, setProductTotalList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [siteID, setSiteID] = useState(0);
+  const [file, setFile] = useState();
+  const [fileName, setFileName] = useState("");
 
-  const handleChange=(e)=>{
-  const {name,value}=e.target;
-  const item = [...register];
-  item[0][name] = value;
-  setRegister(item);
+  // useEffect(() => {
+  //   getproductsTotal();
+  // }, []);
 
-}
- const handleChange2=(e,value)=>{
-  // console.log(value);
-  // console.log(value.name);
-  // console.log(e.value);
-const item = [...register];
- item[0][value.name] = e.value;
-      setRegister(item);
-   console.log(register);
-}
+  const requirementType = [
+    { value: "New Regulation", label: "New Regulation" },
+    { value: "New Amendment", label: "New Amendment" },
+    { value: "Procedural", label: "Procedural" },
+    { value: "Notice", label: "Notice" },
+    { value: "Order", label: "Order" },
+    { value: "Operational Issues", label: "Operational Issues" },
+  ];
+
+  const requirment = [
+    { value: "Implementation requirment", label: "Implementation requirment" },
+    { value: "Dispute requirment", label: "Dispute requirment" },
+  ];
+
+  const actiontaken = [
+    { value: "Challenge", label: "Challenge" },
+    { value: "Implement", label: "Implement" },
+    { value: "To be reviewed", label: "To be reviewed" },
+  ];
+
+  const impact = [
+    { value: "data exposure", label: "data exposure" },
+    { value: "Revenue loss", label: "Revenue loss" },
+  ];
+
+  const criticality = [
+    { value: "Low", label: "Low" },
+    { value: "Medium", label: "Medium" },
+    { value: "High", label: "High" },
+  ];
+
+  const analyse = [
+    { value: "Yes", label: "Yes" },
+    { value: "No", label: "No" },
+  ];
+
+  const status = [
+    { value: "Open", label: "Open" },
+    { value: "Close", label: "Close" },
+  ];
+
+  // const getproductsTotal = async () => {
+  //   try {
+  //     await axios({
+  //       method: "post",
+  //       url: `http://localhost:8080/api/v1/renewpower/meterdata/site/details`,
+  //     }).then((response) => {
+  //       setProductTotalList(response.data["0"]);
+  //       const site = response.data["0"].reduce(
+  //         (prev, current) =>
+  //           prev["site_id"] > current["site_id"] ? prev : current
+  //       );
+  //       //  console.log("site", site);
+  //       setSiteID(site["site_id"]);
+  //       //  console.log("site id", siteID);
+  //       setLoading(true);
+  //     });
+  //   } catch (error) {
+  //     alert(error);
+  //   }
+  // };
+
+  const [dataFields, setDataFields] = useState([
+    {
+      // site_id: "",
+      date: new Date(),
+      quarter: "",
+      affectedMW: "",
+      state: "",
+      site_name: "",
+      Connectivity: "",
+      requirement_type: "",
+      nodal_agency: "",
+      new_change: "",
+      reference_number: "",
+      analyse: "",
+      impact: "",
+      criticality: "",
+      requirement: "",
+      action_taken: "",
+      key_responsible_person: "",
+      present_working_status: "",
+      description: "",
+      fileName: "",
+    },
+  ]);
+
+  const handleDate = (dateSelected, index) => {
+    const data = [...dataFields];
+    data[index]["date"] = dateSelected;
+    const result = monthsToQuarters(dateSelected.getMonth());
+    console.log(result);
+    data[index]["quarter"] = result + "";
+    setDataFields(data);
+  };
+  const handleAffectedMW = (
+    e,
+    index
+  ) => {
+    const data = [...dataFields];
+    data[index]["affectedMW"] = e.target.value;
+    setDataFields(data);
+  };
+  const handleConnectivitySelect = (connectivity, index) => {
+    let data = [...dataFields];
+    data[index].Connectivity = connectivity;
+    setDataFields(data);
+  };
+  const handleStateSelect = (state, index) => {
+    let data = [...dataFields];
+    data[index].state = state;
+    setDataFields(data);
+  };
+  const handleSiteSelect = (site, index) => {
+    let data = [...dataFields];
+    //console.log(site);
+    data[index].site_name = site;
+    setDataFields(data);
+  };
+
+  const handleRequirementTypeSelect = (
+    selectedOption,
+    index
+  ) => {
+    console.log(selectedOption);
+    let data = [...dataFields];
+    //console.log(site);
+    data[index].requirement_type = selectedOption.value;
+    setDataFields(data);
+    console.log(dataFields);
+  };
+
+  const handleNodalAgency = (
+    e,
+    index
+  ) => {
+    const data = [...dataFields];
+    data[index]["nodal_agency"] = e.target.value;
+    setDataFields(data);
+  };
+
+  const handleNewChange = (
+    e,
+    index
+  ) => {
+    const data = [...dataFields];
+    data[index]["new_change"] = e.target.value;
+    setDataFields(data);
+  };
+
+  const handleReferenceNumber = (
+    e,
+    index
+  ) => {
+    const data = [...dataFields];
+    data[index]["reference_number"] = e.target.value;
+    setDataFields(data);
+  };
+
+  const handleAnalyseSelect = (
+    selectedOption,
+    index
+  ) => {
+    console.log(selectedOption);
+    let data = [...dataFields];
+    //console.log(site);
+    data[index].analyse = selectedOption.value;
+    setDataFields(data);
+    console.log(dataFields);
+  };
+
+  const handleImpactSelect = (
+    selectedOption,
+    index
+  ) => {
+    console.log(selectedOption);
+    let data = [...dataFields];
+    //console.log(site);
+    data[index].impact = selectedOption.value;
+    setDataFields(data);
+    console.log(dataFields);
+  };
+
+  const handleCriticalitySelect = (
+    selectedOption,
+    index
+  ) => {
+    console.log(selectedOption);
+    let data = [...dataFields];
+    //console.log(site);
+    data[index].criticality = selectedOption.value;
+    setDataFields(data);
+    console.log(dataFields);
+  };
+
+  const handleRequirementSelect = (
+    selectedOption,
+    index
+  ) => {
+    console.log(selectedOption);
+    let data = [...dataFields];
+    //console.log(site);
+    data[index].requirement = selectedOption.value;
+    setDataFields(data);
+    console.log(dataFields);
+  };
+  const handleActionTakenSelect = (
+    selectedOption,
+    index
+  ) => {
+    console.log(selectedOption);
+    let data = [...dataFields];
+    //console.log(site);
+    data[index].action_taken = selectedOption.value;
+    setDataFields(data);
+    console.log(dataFields);
+  };
+
+  const handleKeyResposiblePersonChange = (
+    e,
+    index
+  ) => {
+    const data = [...dataFields];
+    data[index]["key_responsible_person"] = e.target.value;
+    setDataFields(data);
+  };
+
+  const handlePresentWorkingStatusChange = (
+    e,
+    index
+  ) => {
+    const data = [...dataFields];
+    data[index]["present_working_status"] = e.target.value;
+    setDataFields(data);
+  };
+
+  const handleDescriptionChange = (
+    e,
+    index
+  ) => {
+    const data = [...dataFields];
+    data[index]["description"] = e.target.value;
+    setDataFields(data);
+  };
+
+  const saveFile = (e) => {
+    setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+  };
+
+  const uploadFile = async (e) => {
+    // const formData = new FormData();
+    // formData.append("file", file);
+    // formData.append("fileName", fileName);
+    // try {
+    //   const res = await axios.post(
+    //     "http://localhost:8080/api/v1/renewpower/meterdata/regulatory/upload",
+    //     formData
+    //   );
+    //   console.log(res);
+    // } catch (ex) {
+    //   console.log(ex);
+    // }
+  };
+
  
-  const onformsubmit=(e)=>{
-    e.preventDefault();
-  console.log(register);
-     } 
-    
-  return (
-    <> 
-     <form onSubmit={onformsubmit}>
-         <div className="form">
-         <div className="issuedate">
-          <label>Issue Date</label>
-          <input type="date" className="inputbox" name="date" onChange={handleChange}></input>
+    return (
+      <>
+       <div className="sitemasterheading">
+        <h2 className="SiteMasterForm">RegulatoryRegister Form</h2>
+      </div>
+        <div>
+          {/* <h2 className="h4 text-center mt-3">Adding a New Regulatory Issue</h2> */}
+          <div className="container mt-3">
+            <div className="row p-3 col-sm-12 col-xs-12 col-md-12 col-lg-12 col-xxl-12">
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Date</label>
+                <DatePicker
+                  id="regulatory_datepicker_1"
+                  selected={dataFields["0"]["date"]}
+                  dateFormat="yyyy-MM-dd"
+                  locale={enIN}
+                  onChange={(date) => handleDate(date, 0)}
+                  selectsStart
+                  maxDate={new Date()}
+                />
+              </div>
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Quarter</label>
+                <input
+                  className="form-control text-center"
+                  type="input"
+                  name="quarter"
+                  value={dataFields["0"]["quarter"]}
+                  disabled
+                  // onChange={(e) => {
+                  //   handleTime_block(e, index);
+                  // }}
+                />
+              </div>
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Affected MW</label>
+                <input
+                  className="form-control text-center"
+                  placeholder=" enter the affected MW"
+                  type="input"
+                  name="affectedMW"
+                  value={dataFields["0"]["affectedMW"]}
+                  onChange={(e) => {
+                    handleAffectedMW(e, 0);
+                  }}
+                />
+              </div>
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Connectivity Type</label>
+                <Select
+                  getOptionLabel={(option) => option["Connectivity"]}
+                  getOptionValue={(option) => option["Connectivity"]}
+                  onChange={(option) => {
+                    handleConnectivitySelect(option.Connectivity, 0);
+                  }}
+                  options={_.uniqBy(productTotalList, "Connectivity")}
+                />
+              </div>
+            </div>
+            <div className="row p-3 col-sm-12 col-xs-12 col-md-12 col-lg-12 col-xxl-12">
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">State</label>
+                <Select
+                  getOptionLabel={(option) => option["state"]}
+                  getOptionValue={(option) => option["state"]}
+                  onChange={(option) => {
+                    handleStateSelect(option.state, 0);
+                  }}
+                 // options={_.uniqBy(productTotalList, "state")}
+                 options={state}
+                />
+              </div>
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Site Name</label>
+                <Select
+                  getOptionLabel={(option) => option["site_name"]}
+                  getOptionValue={(option) => option["site_name"]}
+                  onChange={(option) => {
+                    handleSiteSelect(option.site_id, 0);
+                  }}
+                  options={productTotalList.filter(
+                    (item) => item["state"] === dataFields["0"].state
+                  )}
+                />
+              </div>
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Requirement Type</label>
+                <Select
+                  onChange={(option) => {
+                    handleRequirementTypeSelect(option, 0);
+                  }}
+                  options={requirementType}
+                />
+              </div>
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Nodal Agency</label>
+                <input
+                  className="form-control"
+                  placeholder=" enter the nodal agency"
+                  type="input"
+                  name="nodal_agency"
+                  value={dataFields["0"]["nodal_agency"]}
+                  onChange={(e) => {
+                    handleNodalAgency(e, 0);
+                  }}
+                />
+              </div>
+            </div>
+            <div className="row p-3 col-sm-12 col-xs-12 col-md-12 col-lg-12 col-xxl-12">
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label ">New Change</label>
+                <input
+                  className="form-control text-center"
+                  placeholder=" enter the new change"
+                  type="input"
+                  name="new_change"
+                  value={dataFields["0"]["new_change"]}
+                  onChange={(e) => {
+                    handleNewChange(e, 0);
+                  }}
+                />
+              </div>
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Reference Number</label>
+                <input
+                  className="form-control text-center"
+                  placeholder=" enter the reference number"
+                  type="input"
+                  name="nodal_agency"
+                  value={dataFields["0"]["reference_number"]}
+                  onChange={(e) => {
+                    handleReferenceNumber(e, 0);
+                  }}
+                />
+              </div>
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Analyse</label>
+                <Select
+                  onChange={(option) => {
+                    handleAnalyseSelect(option, 0);
+                  }}
+                  options={analyse}
+                />
+              </div>
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Impact</label>
+                <Select
+                  onChange={(option) => {
+                    handleImpactSelect(option, 0);
+                  }}
+                  options={impact}
+                />
+              </div>
+            </div>
+            <div className="row p-3 col-sm-12 col-xs-12 col-md-12 col-lg-12 col-xxl-12">
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Criticality</label>
+                <Select
+                  onChange={(option) => {
+                    handleCriticalitySelect(option, 0);
+                  }}
+                  options={criticality}
+                />
+              </div>
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Requirement</label>
+                <Select
+                  onChange={(option) => {
+                    handleRequirementSelect(option, 0);
+                  }}
+                  options={requirment}
+                />
+              </div>
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Action Taken</label>
+                <Select
+                  onChange={(option) => {
+                    handleActionTakenSelect(option, 0);
+                  }}
+                  options={actiontaken}
+                />
+              </div>
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Key Responsible Person</label>
+                <input
+                  className="form-control text-center"
+                  placeholder=" enter the key responsible person"
+                  type="input"
+                  name="key_responsible_person"
+                  value={dataFields["0"]["key_responsible_person"]}
+                  onChange={(e) => {
+                    handleKeyResposiblePersonChange(e, 0);
+                  }}
+                />
+              </div>
+            </div>
+            <div className="row p-3 col-sm-12 col-xs-12 col-md-12 col-lg-12 col-xxl-12">
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Present Working Status</label>
+                <input
+                  className="form-control"
+                  placeholder=" enter the present working status"
+                  type="input"
+                  name="present_working_status"
+                  value={dataFields["0"]["present_working_status"]}
+                  onChange={(e) => {
+                    handlePresentWorkingStatusChange(e, 0);
+                  }}
+                />
+              </div>
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Description</label>
+                <input
+                  className="form-control"
+                  placeholder=" enter description"
+                  type="input"
+                  name="description"
+                  value={dataFields["0"]["description"]}
+                  onChange={(e) => {
+                    handleDescriptionChange(e, 0);
+                  }}
+                />
+              </div>
+              <div className="text-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <label className="form-label">Upload</label>
+                <input type="file" name="file" onClick={saveFile}></input>
+              </div>
+              <div className="text-center align-self-center col-md-3 col-lg-3 col-xxl-3 col-sm-12 col-xs-12">
+                <input
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  value="submit"
+                   id="regulatory_submit_button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    uploadFile(e);
+                  }}
+                />
+              </div>
+            </div>
           </div>
-          <div className="quarter">
-          <label>Quarter</label>
-          <input type="text" className="inputbox" name="quarter" onChange={handleChange}></input>
-          </div>
-          <div className="affectedmw">
-          <label>Affected MW</label>
-          <input type="text" className="inputbox" name="affectedmw" onChange={handleChange}></input>
-          </div>
-          <div className="connectivitylevel">
-          <label>Connectivity Levels</label>
-          <Select options={connectivitylevel} name="Connectivitylevel" className="selectdata" onChange={handleChange2}/>
-          </div>
-          <div className="state">
-          <label>State</label>
-          <Select options={state} className="selectdata" name="state" onChange={handleChange2}/>
-          </div>
-          </div>
-           {/* ..............form2................. */}
-          <div className="form2">
-         <div className="requirmenttype">
-          <label>Requirment Type</label>
-          <Select options={requirmenttype} className="selectdata" name="requirmenttype" onChange={handleChange2} />
-          </div>
-          <div className="nodalagency">
-          <label>Nodal Agency</label>
-          <input type="text" className="inputbox" name="nodal" onChange={handleChange}></input>
-          </div>
-          
-         
-            <div className="site">
-          <label>Site</label>
-          <input type="text" className="inputbox" name="site" onChange={handleChange}></input>
-          </div>
-          <div className="newchange">
-          <label>New Change</label>
-           <input type="text" className="inputbox" name="newchange" onChange={handleChange}></input>
-          </div>
-          <div className="referencenumber">
-          <label>Reference Number</label>
-          <input type="text" className="inputbox" name="reference"onChange={handleChange}></input>
-          </div>
-          </div>
-          <div className="form3">
-          <div className="analyse">
-          <label>Analyse</label>
-          {/* <div className="yesno">
-          <input type="radio" value="yes" name="analyse" className="yesanalyse" onChange={handleChange}></input>Yes
-          <input type="radio" value="no" name="analyse" className="noanalyse" onChange={handleChange}></input>No 
-          </div> */}
-           <Select options={analyse} className="selectdata" name="analyse" onChange={handleChange2} />
-         </div>
-         <div className="impact">
-          <label>Impact</label>
-         <Select options={impact} className="selectdata" name="impact" onChange={handleChange2} />
-          </div>
-          <div className="description">
-          <label>Description</label>
-          <input type="text" className="inputbox" name="description" onChange={handleChange}></input>
-          </div>
-         <div className="Criticality">
-          <label>Criticality</label>
-          <Select options={criticality} className="selectdata" name="criticality" onChange={handleChange2} />
-          </div>
-         
-          
-          <div className="key">
-          <label>Key responsible persons</label>
-          <input type="text" className="inputbox" name="Key" onChange={handleChange}></input>
-          </div>
-          </div>
-          {/* ................row3............ */}
-          <div className="row3">
-          <div className="requirment">
-          <label>Requirment</label> 
-          <Select options={requirment} className="selectdata" name="requirment" onChange={handleChange2}/>
-          </div>
-          <div className="actiontaken">
-          <label>Action Taken</label>
-          <Select options={actiontaken} className="selectdata" name="actiontaken" onChange={handleChange2}/>
-          </div>
-          <div className="presentworking">
-          <label>Present working status</label>
-          <input type="textarea" className="inputbox" name="presentworking" onChange={handleChange}></input>
-          </div>
-          <div className="status">
-            <label>Status</label>
-            {/* <div className="openclose">
-            <input type="radio" value="open"  name="status" onChange={handleChange}></input>Open
-            <input type="radio" value="close" name="status" className="close" onChange={handleChange}></input>Close
-          </div> */}
-          <Select options={status} className="selectdata" name="status" onChange={handleChange2}/>
-          </div>
-          <div className="documentupload">
-          <label>Required/relevant document</label>
-          <div className="file">
-          <input type="file" className="choosefile"></input>
-           </div>
-           </div>
-           </div>
-           <div className="savebtn">
-          <button type="submit" className="savedata">Submit</button>
-           </div>
-        </form> 
-    </>
-  
-  );
+          {/* <button className="form_button" onClick={addFields}>
+              Add More..
+            </button> */}
+          {/* <button className="form_button" onClick={submit}>
+            Submit
+          </button> */}
+        </div>
+      </>
+    );
+  }
 
-}

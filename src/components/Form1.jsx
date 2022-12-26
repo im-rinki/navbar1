@@ -97,122 +97,70 @@ export default function Form1() {
     console.log(input);
    }
 
-//  function savedata(e,index) {
-       
-  //       if (
-  //          date.length==0||
-  //          state.length == 0 ||
-  //          sitename.length==0||
-  //          dms.length == 0 ||
-  //          dmsloss.length == 0 ||
-  //          revenue.length == 0
-  //         //  startDate.length == 0
-  //        ) {
-  //         // alert("require");
-  //          setError(true);
-  //        }
-  //  {
-  //   setError(false)
-  //  }
- 
-    //  e.preventDefault();
-    //  console.log(" formdata ", input);
- //   console.log(date,input,  dms, dmsloss, revenue);
-  //  }
+
   return (
     <>
-      {/* <div className="headingbg">
-        <div className="heading">
-          <h2>Form</h2>
-        </div>
-      </div> */}
-      <table className="table">
-        <thead className="thead">
-          <tr className="tr">
-          <th className="th"><label className="d1">Date</label></th>
-          <th><label className="st">State</label></th>
-          <th><label className="sn">Sitename</label></th>
-          <th><label className="dm">Dms</label></th>
-          <th><label className="dl">Dms Loss %</label></th>
-          <th><label className="r1">Revenue</label></th>
-          </tr>
-         </thead>
-      </table>
+   <div className="sitemasterheading">
+        <h2 className="SiteMasterForm">Meter Data Form</h2>
+      </div>
+    <div className="dynamiclabel">
+          <label className="d1">Date</label>
+          <label className="st">State</label>
+          <label className="sn">Sitename</label>
+          <label className="dm">Dsm</label>
+          <label className="dl">Dsm Loss %</label>
+          <label className="r1">Revenue</label>
+          </div>
       <form onSubmit={submitdata}>
         {input.map((x, i) => {
           return (
-           
-            <div className="form-inline" key={i}>
-              
+           <div className="form-inline" key={i}>
               <div className="date">
-                {/* <label>Date</label> */}
                 <input
+                id="formdate1"
                   type="date"
                   name="date"
                   className="inputdate"
+                  autoComplete="off"
                   onChange={(e) => handleDate(e, i)}
                 />
-                {/* {errors.date && touched.date ? (
-                  <p className="errormsg">{errors.date}</p>
-                ) : null} */}
-                {/* <div className="errormsg">
-                  {error ? 
-                    <label className="vaildation">This field is require</label>
-                   : 
-                    ""
-                  }
-                </div> */}
-                {error?<p>This field is require</p> :null}
               </div>
 
               <div className="div2">
-                {/* <label>State</label> */}
-                <Select
-                  //isMulti
-                  
+              <Select
+               
+                  id="select_1"
                   options={options}
                   name="state"
-                  className="select"
+                  // className="select"
+                  autoComplete="off"
                   onChange={(e) => handleStatename(e, i)}
                 />
-                {error?<p>This field is require</p> :null}
-                 {/* <div className="errormsg">
-                {error && state.length <= 0 ? (
-                  <label className="vaildation">This field is require</label>
-                ) : (
-                  ""
-                )}
-              </div> */}
+               
               </div>
 
              
               <div className="div3">
-                {/* <label>Sitename</label> */}
+              
                 <Select
+                  id="select_2"
                   options={options1.filter((item)=>item.state===input[i].state)}
                   name="sitename"
-                  className="select"
+                  // className="select"
+                  autoComplete="off"
                   onChange={(e) => handleSitename(e, i)}
                 ></Select>
-                {error?<p>This field is require</p> :null}
-                {/* {errors.sitename && touched.sitename ? (
-                  <p className="errormsg">{errors.sitename}</p>
-                ) : null} */}
-                {/* <div className="errormsg">
-                  {error && sitename.length <= 0 ? (
-                    <label className="vaildation">This field is require</label>
-                  ) : (
-                    ""
-                  )}
-                </div> */}
+              
               </div>
               <div className="div4">
-                {/* <label>DMS</label> */}
+                
                 <input
+                 id="formdate1"
                   type="text"
                   className="dms"
                   name="dms"
-                  placeholder="enter the dms"
+                  autoComplete="off"
+                  placeholder="enter the dsm"
                   onChange={(e) => handleDms(e, i)}
                 ></input>
                 {error?<p>This field is require</p> :null}
@@ -220,46 +168,30 @@ export default function Form1() {
               </div>
 
               <div className="div5">
-                {/* <label>DMS Loss %</label> */}
+                
                 <input
+                 id="formdate1"
                   type="text"
                   name="dmsloss"
                   className="dms"
-                  placeholder="enter the dms loss"
+                  autoComplete="off"
+                  placeholder="enter the dsm loss"
                   onChange={(e) => handleDmsloss(e, i)}
                 ></input>
-                {error?<p>This field is require</p> :null}
-                {/* {errors.dmsloss && touched.dmsloss ? (
-                  <p className="errormsg">{errors.dmsloss}</p>
-                ) : null} */}
-                {/* <div className="errormsg">
-                  {error && dmsloss.length <= 0 ? (
-                    <label className="vaildation">This field is require</label>
-                  ) : (
-                    ""
-                  )}
-                </div> */}
+              
               </div>
               <div className="div6">
-                {/* <label>Revenue</label> */}
-                <input
+
+               <input
+                id="formdate1"
                   type="text"
-                  className="dms"
+                  className="dsm"
                   name="revenue"
+                  autoComplete="off"
                   placeholder="enter the revenue"
                   onChange={(e) => handleRevenue(e, i)}
                 ></input>
-                {error?<p>This field is require</p> :null}
-                {/* {errors.revenue && touched.revenue ? (
-                  <p className="errormsg">{errors.revenue}</p>
-                ) : null} */}
-                {/* <div className="errormsg">
-                  {error && revenue.length <= 0 ? (
-                    <label className="vaildation">This field is require</label>
-                  ) : (
-                    ""
-                  )}
-                </div> */}
+              
               </div>
 
               <div className="div7">
@@ -269,7 +201,7 @@ export default function Form1() {
                     type="button"
                     onClick={() => removeinputField(i)}
                   >
-                    -
+                    Remove
                   </button>
                 )}
               </div>
@@ -280,7 +212,7 @@ export default function Form1() {
                     type="button"
                     onClick={() => addinputField()}
                   >
-                    +
+                    Add
                   </button>
                 )}
               </div>
@@ -289,10 +221,10 @@ export default function Form1() {
         })}
         <div className="button">
           <button
-            className="button submit"
+            className="buttonsubmit"
             type="submit"
             value="submit"
-            //  onClick={savedata}
+           
           >
             Submit
           </button>

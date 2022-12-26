@@ -13,38 +13,42 @@
 }
 .solar{
    
-   border: none;
+  border:none;
     width:4rem;
     height:1.5rem;
-    background-color:darkgreen;
+    background-color:#056C45;
     border-radius: 5px;
     color:white;
     font-size: smaller; 
+    font-family: 'Copse', serif;
+    
 }
 .wind{
-    border: none;
+  border:none;
     margin-left: 10px;
     width:4rem;
     height:1.5rem;
-    background-color: darkgreen;
+    background-color: #056C45;
     border-radius: 5px;
     color:white;
     font-size: smaller;
+    font-family: 'Copse', serif;
     }
 
 .both{
-    border: none;
+  border:none;
     margin-left: 10px;
     width:4rem;
     height:1.5rem;
-    background-color: darkgreen;
+    background-color: #056C45;
     border-radius: 5px;
     color:white;
     font-size: smaller;
+    font-family: 'Copse', serif;
 }
 .MapForm{
     display: flex;
-    margin-top: 30px;
+    margin-top:0.5rem;
     
 } 
 .MapForm1{
@@ -54,70 +58,74 @@
 }
 label{
     margin-top: 5px;
-    font-weight: bold;
-    /* margin-left: 65px; */
-    text-align: center;
+ 
+     text-align: center; 
   }
-  .select{
-    width:150px;
-    margin-left: 5px;
-    min-height:40px;
-  }
+
 
 .startdate{
     display: flex;
     flex-direction: column;
-    /* margin-left: 10px; */
+     font-family: 'Copse', serif; 
+    
 }
 .enddate{
     display: flex;
     flex-direction: column;
     margin-left: 20px;
+    font-family: 'Copse', serif;
     }
-    .statemap{
-
-    }
+   
     .statemaplabel{
         text-align: center;
         margin-left: 7rem;
+        font-family: 'Copse', serif;
     }
     .sitenamemap{
         margin-left: 20px;
     }
     .inputmap{
         width:250px;
-        /* margin-left: 10px; */
+        margin-left: 10px; 
         height:2rem; 
+       
     }
     .selectmap{
-        width:250px;
-    /* margin-left: 10px; */
+        width:255px;
+     margin-left: 10px; 
     height:30px;
+    font-family: 'Copse', serif; 
     }
     .MapFormBtn{
-        text-align:center;
-    margin-top:30px;
+        margin-left:35%;
+        margin-top:30px;
     }
+
     .mapformbutton{
-        border: none;
-        background-color: green;
+      border:none;
+        background-color: #056C45;
         border-radius:5px;
-    width:200px;
-    height:30px;
-    font-size:15px;
-    color:white;
+        width:30%;
+        height:30px;
+        font-size:15px;
+       color:white;
+       font-family: 'Copse', serif;
+       font-size:medium;
     }
     .mapformtable{
         margin-top: 40px;
-        width:200rem;
+        margin-left:10%;
+     
     }
  .table1, .th1, .td1 {
-        border: 1px solid black;
+        border: 2px solid black;
         border-collapse: collapse;
+
       }
       .th1{
         background-color: rgb(43, 101, 209); 
         color:white;
+        font-family: 'Copse', serif;
       }
       .th1, .td1 {
         padding-top: 10px;
@@ -125,30 +133,31 @@ label{
         padding-left: 20px;
         padding-right: 10px;
         text-align: center;
+        font-family: 'Copse', serif;
         
       }
-      .headingtable{
-        text-align: center;
-        margin-top: 20px;
-        margin-left: 15rem;
-        font-weight: bold;
-      }
+     
       .formtable{
         text-align: center;
-        margin-left: 10rem;
+        width:95%;
+       
         margin-top: 20px;
+        margin-left:2%
       }
+     
       .downloadbtn{
         text-align:center;
         margin-top:20px;
         margin-left:2rem;
       }
       .downloadbutton{
-        border: none;
-        background-color:darkgreen;
+        border:none;
+        background-color:#056C45;
         border-radius:5px;
         width:200px;
         height:30px;
         font-size:15px;
         color:white;
+        font-size:medium;
+        font-family: 'Copse', serif;
       }

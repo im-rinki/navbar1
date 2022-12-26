@@ -1,170 +1,23 @@
-*{
-    margin:0px;
-    padding:0px; 
-}
-.form{
-     margin-top: 10px; 
-     display: flex;
-     margin-left:5%;
-    }
-    .form3{
-        margin-top: 20px; 
-        display: flex;
-        margin-left:5%;
-    }
-    label{
-        margin-top: 5px;
-        font-weight: bold;
-        /* margin-left: 65px; */
-        text-align: center;
-      }
-      .select{
-        width:150px;
-        margin-left: 5px;
-        min-height:40px;
-      }
-.issuedate{
-        display: flex;
-        flex-direction: column;
-        margin-top: 1px;
-    }
-    .quarter{
-        display: flex;
-        flex-direction: column;   
-    }
-    .affectedmw{
-        display: flex;
-        flex-direction: column;   
-    }
-    .connectivitylevel{
-        display: flex;
-        flex-direction: column; 
-        margin-left: 5px;
-    }
-    .state{
-        display: flex;
-        flex-direction: column;  
-        margin-left: 5px;
 
-    }
-    .requirmenttype{
-        margin-left: 5px;
-        display: flex;
-        flex-direction: column;
-    }
-    .nodalagency{
-        margin-left: 5px;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .site{
-        display: flex;
-        flex-direction: column; 
-    }
-    .newchange{
-        display: flex;
-        flex-direction: column;
-      
-    }
-    .referencenumber{
-        display: flex;
-        flex-direction: column; 
-       
- }
- .analyse{
-    display: flex;
-    flex-direction:column; 
-   margin-left:5px;
- }
- 
-  
-  .impact{
-    display: flex;
-    flex-direction:column; 
- 
-  } 
-  .description{
-    display: flex;
-    flex-direction:column; 
-  }
-  .Criticality{
-    margin-left: 5px;
-    display: flex;
-    flex-direction: column;
-}
-.key{
-    margin-left: 5px;
-    display: flex;
-    flex-direction: column;
-   
-}
-.requirment{
-    margin-left:5px;
-    display: flex;
-    /* margin-top:20px; */
-    flex-direction: column;
-}
-.actiontaken{
-    margin-left:5px;
-    display: flex;
-    /* margin-top:5px; */
-    flex-direction: column;
-}
-.presentworking{
-    margin-left: 5px;
-    display: flex;
-    flex-direction: column;
-}
-.status{
-    margin-left:5px;
-    display: flex;
-    flex-direction: column;
-}
-.documentupload{
-   
-    display: flex;
-    flex-direction: column;
- }
-  .choosefile{
-     margin-left:5px; 
-} 
- .file{
-    margin-top:5px;
-     margin-left: 30px; 
- }
+#regulatory_datepicker_1{
 
-.selectdata{
-    width:200px;
-    margin-left: 20px;
-    height:30px;
-   /* margin-top: 4px; */
+    text-align: center;
+
+    height: 50%
 
 }
-.inputbox{
-    width:200px;
-    margin-left: 20px;
-    height:2rem; 
-}
-.form2{
-    margin-top:20px;
-    display: flex;
-    margin-left:5%;
-}
-.row3{
-    display: flex;
-    margin-top:20px;
-    margin-left:5%;
-}
-.savebtn{
-    text-align:center;
-    margin-top:30px;
-     }
-.savedata{
-    background-color:green;
-    border-radius:5px;
-    width:200px;
-    height:30px;
-    font-size:15px;
-    color:white;
-}
+
+
+
+#regulatory_submit_button{
+
+    width: 150px;
+
+    height: 40px;
+background-color:#056C45;
+color:white;
+    font-size: medium;
+
+     
+
+ }

@@ -68,6 +68,69 @@ DSMloss : "27.522133010556 %",
                             },
                             {
        
+                              ProjectName  : "Mehbubnagar-2",
+                              CapacityMw   : "100.00",
+                              PlantType: "Solar",
+                              DSMinINR: "c39756296.25000000",
+                              DSMloss : "27.522133010556 %",
+                                  
+                                  },
+                                  {
+       
+                                    ProjectName  : "Mehbubnagar-2",
+                                    CapacityMw   : "100.00",
+                                    PlantType: "Solar",
+                                    DSMinINR: "c39756296.25000000",
+                                    DSMloss : "27.522133010556 %",
+                                        
+                                        },
+                                        {
+       
+                                          ProjectName  : "Mehbubnagar-2",
+                                          CapacityMw   : "100.00",
+                                          PlantType: "Solar",
+                                          DSMinINR: "c39756296.25000000",
+                                          DSMloss : "27.522133010556 %",
+                                              
+                                              },
+                                              {
+       
+                                                ProjectName  : "Mehbubnagar-2",
+                                                CapacityMw   : "100.00",
+                                                PlantType: "Solar",
+                                                DSMinINR: "c39756296.25000000",
+                                                DSMloss : "27.522133010556 %",
+                                                    
+                                                    },
+                                                    {
+       
+                                                      ProjectName  : "Mehbubnagar-2",
+                                                      CapacityMw   : "100.00",
+                                                      PlantType: "Solar",
+                                                      DSMinINR: "c39756296.25000000",
+                                                      DSMloss : "27.522133010556 %",
+                                                          
+                                                          },
+                                                          {
+       
+                                                            ProjectName  : "Mehbubnagar-2",
+                                                            CapacityMw   : "100.00",
+                                                            PlantType: "Solar",
+                                                            DSMinINR: "c39756296.25000000",
+                                                            DSMloss : "27.522133010556 %",
+                                                                
+                                                                },
+                                                    {
+       
+                                                      ProjectName  : "Mehbubnagar-2",
+                                                      CapacityMw   : "100.00",
+                                                      PlantType: "Solar",
+                                                      DSMinINR: "c39756296.25000000",
+                                                      DSMloss : "27.522133010556 %",
+                                                          
+                                                          },
+                            {
+       
                                 ProjectName  : "Mehbubnagar-2",
                                 CapacityMw   : "100.00",
                                 PlantType: "Solar",
@@ -83,16 +146,16 @@ export default function Table() {
     </div>
     <div className='formtable'>
     <DataTable
-    title="Top 10 DSM loss making sites for the current month"
+    title= "Top 10 DSM loss making sites for the current month"
           columns={columns}
            data={maptabledata}
            highlightOnHover
-		pointerOnHover
-		pagination
+		       pointerOnHover
+		       pagination
           selectableRows
         //   expandableRows
         //   expandableRowsComponent={ExpandedComponent}
-         
+         className='datatb'
         />
     </div>
     <div className='downloadbtn'>
